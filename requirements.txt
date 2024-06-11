@@ -19,7 +19,9 @@ charset-normalizer==2.0.3
 click==7.1.2
 configparser==5.0.1
 Cython==0.29.21
-dataclasses==0.7
+#dataclasses==0.7
+dataclasses==0.6
+
 decorator==4.4.2
 defusedxml==0.6.0
 docker-pycreds==0.4.0
@@ -103,7 +105,9 @@ rsa==4.7
 sacrebleu==1.4.14
 sacremoses==0.0.43
 scikit-learn==0.23.1
-scipy==1.5.0rc1
+#scipy==1.5.0rc1
+scipy==1.5.1
+
 Send2Trash==1.5.0
 sentencepiece==0.1.92
 sentry-sdk==0.19.5
