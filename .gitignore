@@ -3,9 +3,9 @@
 .idea
 **/__pycache__
 # Runs folder
-runs
-runs*
-runs.bkp
+#runs
+#runs*
+#runs.bkp
 tmp
 
 # Shell scripts are ignored by default
@@ -20,5 +20,5 @@ notebooks
 **/*.xlsx
 
 # Ignore data by default
-data
+#data
 **/*.zip
