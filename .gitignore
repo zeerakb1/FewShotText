@@ -9,7 +9,7 @@
 tmp
 
 # Shell scripts are ignored by default
-**/*.sh
+#**/*.sh
 
 # Jupyter stuff
 notebooks
