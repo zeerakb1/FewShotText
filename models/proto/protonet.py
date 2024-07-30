@@ -1850,8 +1850,6 @@
 
 
 
-
-
 import json
 import argparse
 from models.encoders.bert_encoder import BERTEncoder
@@ -2487,4 +2485,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
