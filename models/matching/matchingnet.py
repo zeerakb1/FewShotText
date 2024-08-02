@@ -423,7 +423,7 @@ import warnings
 import logging
 from utils.few_shot import create_episode, create_ARSC_train_episode, create_ARSC_test_episode
 from utils.math import euclidean_dist, cosine_similarity
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, precision_score, recall_score
 import matplotlib.pyplot as plt
 
 logging.basicConfig()
@@ -474,19 +474,22 @@ class MatchingNet(nn.Module):
         loss_fn = nn.CrossEntropyLoss()
         loss_val = loss_fn(distances_from_query_to_classes, true_labels.argmax(1))
         acc_val = (true_labels.argmax(1) == distances_from_query_to_classes.argmax(1)).float().mean()
-        f1_val = f1_score(
-            true_labels.argmax(1).cpu().detach().numpy(),
-            distances_from_query_to_classes.argmax(1).cpu().detach().numpy(),
-            average="weighted"
-        )
+        true_labels_np = true_labels.argmax(1).cpu().detach().numpy()
+        pred_labels_np = distances_from_query_to_classes.argmax(1).cpu().detach().numpy()
+        f1_val = f1_score(true_labels_np, pred_labels_np, average="weighted")
+        precision_val = precision_score(true_labels_np, pred_labels_np, average="weighted")
+        recall_val = recall_score(true_labels_np, pred_labels_np, average="weighted")
+        
         return loss_val, {
             "loss": loss_val.item(),
             "metrics": {
                 "acc": acc_val.item(),
                 "loss": loss_val.item(),
                 "f1": f1_val,
+                "precision": precision_val,
+                "recall": recall_val
             },
-            "y_hat": distances_from_query_to_classes.argmax(1).cpu().detach().numpy()
+            "y_hat": pred_labels_np
         }
 
     def train_step(self, optimizer, data_dict: Dict[str, List[str]], n_support, n_classes, n_query):
