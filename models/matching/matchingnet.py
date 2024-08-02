@@ -475,8 +475,8 @@ class MatchingNet(nn.Module):
         loss_val = loss_fn(distances_from_query_to_classes, true_labels.argmax(1))
         acc_val = (true_labels.argmax(1) == distances_from_query_to_classes.argmax(1)).float().mean()
         f1_val = f1_score(
-            true_labels.argmax(1).cpu().numpy(),
-            distances_from_query_to_classes.argmax(1).cpu().numpy(),
+            true_labels.argmax(1).cpu().detach().numpy(),
+            distances_from_query_to_classes.argmax(1).cpu().detach().numpy(),
             average="weighted"
         )
         return loss_val, {
